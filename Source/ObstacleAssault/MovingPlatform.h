@@ -33,6 +33,6 @@ public:
 	double MaxDistance = 100;
 
 	UPROPERTY(VisibleAnywhere)
-	double Distance = -1;
+	double MovedDistance = -1;
 
 };
