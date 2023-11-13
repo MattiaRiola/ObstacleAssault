@@ -34,8 +34,17 @@ void AMovingPlatform::Tick(float DeltaTime)
 	{
 		//Reverse direction
 		PlatformVelocity = - PlatformVelocity;
-		// evaluate the distance to avoid shifting
-		StartLocation = StartLocation + PlatformVelocity.GetSafeNormal() * MaxDistance;
+		//Evaluate the distance to avoid shifting
+		//Cap the EndingLocationCapped with the max distance from the StartLocation
+		//	this way, when the distance is overshoot by the previous CurrentPosition evaluation
+		//  it is capped at the max distance that the object can reach
+		FVector EndingLocationCapped = StartLocation + PlatformVelocity.GetSafeNormal() * MaxDistance;
+		
+		//Assign the new StartLocation with the EndingLocationCapped
+		StartLocation = EndingLocationCapped;
+
+		//Update the position of the actor with the capped location
+		SetActorLocation(StartLocation);
 	}
 
 }
