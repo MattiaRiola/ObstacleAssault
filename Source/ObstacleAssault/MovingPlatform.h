@@ -15,10 +15,6 @@ public:
 	// Sets default values for this actor's properties
 	AMovingPlatform();
 
-private:
-	bool IsGoingOutOfBoundaries();
-	FVector StartPosition = FVector(0,0,0);
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -28,18 +24,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
-	FVector MyPosition = FVector(0, 0, 0);
-	UPROPERTY(EditAnywhere)
-	float MaxY = 0.0;
-	UPROPERTY(EditAnywhere)
-	float MinY = 0.0;
-	UPROPERTY(EditAnywhere)
-	float delta = 100.0;
-
-	UPROPERTY(EditAnywhere)
-	double DistanceMoved = 0.0d;
-
-	UPROPERTY(EditAnywhere)
-	double DistanceFromOriginalPosition = 0.0d;
+	FVector MyVector = FVector(1, 2, 3);
 
 };
