@@ -16,7 +16,6 @@ void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	SetActorLocation(MyVector);
 }
 
 // Called every frame
@@ -24,5 +23,21 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	SetActorLocation(MyPosition);
+	
+	//invert movement
+	if(IsGoingOutOfBoundaries())
+		delta = 0.0 - delta;
+	//move
+	MyPosition.Y += delta * DeltaTime;
+}
+
+/**
+ * 
+ * @return true if the object is away from boundaries and is moving away
+ * @return false otherwise 
+ */
+bool AMovingPlatform::IsGoingOutOfBoundaries(){
+	return (delta < 0 && MyPosition.Y < MinY) || (delta > 0 && MyPosition.Y > MaxY);
 }
 
