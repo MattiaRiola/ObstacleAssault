@@ -29,10 +29,13 @@ void AMovingPlatform::Tick(float DeltaTime)
 	//Evaluate distance
 	Distance = FVector::Distance(StartLocation, CurrentLocation);
 
+	//Boundary reached
 	if(Distance > MaxDistance)
 	{
+		//Reverse direction
 		PlatformVelocity = - PlatformVelocity;
-		StartLocation = CurrentLocation;
+		// evaluate the distance to avoid shifting
+		StartLocation = StartLocation + PlatformVelocity.GetSafeNormal() * MaxDistance;
 	}
 
 }
