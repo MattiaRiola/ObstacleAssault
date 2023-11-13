@@ -29,5 +29,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	FVector StartLocation;
 
+	UPROPERTY(VisibleAnywhere)
+	double Distance = -1;
 
 };
