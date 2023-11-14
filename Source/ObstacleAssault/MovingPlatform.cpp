@@ -17,6 +17,7 @@ void AMovingPlatform::BeginPlay()
 	Super::BeginPlay();
 	StartLocation = GetActorLocation();
 	UE_LOG(LogTemp, Display, TEXT("Configured distance: %f"),MaxDistance);
+	UE_LOG(LogTemp, Display, TEXT("Configured velocity: %f"),PlatformVelocity);
 }
 
 // Called every frame
