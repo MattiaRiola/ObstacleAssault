@@ -67,5 +67,9 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 
 void AMovingPlatform::RotatePlatform(float DeltaTime)
 {
-	UE_LOG(LogTemp, Warning, TEXT("implement this method"));
+	FRotator CurrentRotation = GetActorRotation();
+	
+	CurrentRotation = (CurrentRotation + (PlatformAngularVelocity * DeltaTime)).Clamp();
+	SetActorRotation(CurrentRotation);
+	
 }

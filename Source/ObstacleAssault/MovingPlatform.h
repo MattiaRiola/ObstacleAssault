@@ -17,15 +17,17 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Moving Platform")
 	FVector PlatformVelocity = FVector(100,0,0);
-
-	UPROPERTY(EditAnywhere)
-	FVector StartLocation;
-
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category="Moving Platform")
+	FRotator PlatformAngularVelocity = FRotator(0,0,100);
+	UPROPERTY(EditAnywhere, Category="Moving Platform")
 	double MaxDistance = 100;
 
-	UPROPERTY(VisibleAnywhere)
+private:
+	FVector StartLocation;
+	UPROPERTY(VisibleAnywhere, Category="Moving Platform")
 	double MovedDistance = -1;
+
+
 
 protected:
 	// Called when the game starts or when spawned
