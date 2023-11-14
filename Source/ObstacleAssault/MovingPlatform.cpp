@@ -32,11 +32,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 void AMovingPlatform::MovePlatform(float DeltaTime)
 {
 	//update position
-	FVector CurrentLocation = GetActorLocation();
-	CurrentLocation = CurrentLocation + (PlatformVelocity * DeltaTime);
-	SetActorLocation(CurrentLocation);
-	//Evaluate distance
-	MovedDistance = FVector::Distance(StartLocation, CurrentLocation);
+	UpdatePosition(DeltaTime);
 
 	//Boundary reached
 	if(ShouldRevertMovementDirection())
@@ -48,6 +44,13 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 		
 	}
 
+}
+
+void AMovingPlatform::UpdatePosition(float DeltaTime)
+{
+	FVector CurrentLocation = GetActorLocation();
+	CurrentLocation = CurrentLocation + (PlatformVelocity * DeltaTime);
+	SetActorLocation(CurrentLocation);
 }
 
 /**
@@ -78,7 +81,12 @@ float AMovingPlatform::CapLocationAndReverseVelocity()
 
 bool AMovingPlatform::ShouldRevertMovementDirection()
 {
-	return MovedDistance > MaxDistance;
+	return GetDistanceMoved() > MaxDistance;
+}
+
+float AMovingPlatform::GetDistanceMoved()
+{
+	return  FVector::Distance(StartLocation, GetActorLocation());
 }
 
 void AMovingPlatform::RotatePlatform(float DeltaTime)
