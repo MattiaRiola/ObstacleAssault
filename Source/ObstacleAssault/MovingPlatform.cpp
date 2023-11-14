@@ -39,12 +39,24 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 	MovedDistance = FVector::Distance(StartLocation, CurrentLocation);
 
 	//Boundary reached
-	if(MovedDistance > MaxDistance)
+	if(ShouldRevertMovementDirection())
 	{
-		float OverShoot = MovedDistance - MaxDistance;
+		float OverShoot = CapLocationAndReverseVelocity();
 		UE_LOG(LogTemp, Warning, TEXT("%s Pltform overshot: %f"),*GetName(), OverShoot);
 
 
+		
+	}
+
+}
+
+/**
+ * @brief cap the location to max distance and reverse the velocity
+ * 
+ * @return float overshot of the cap 
+ */
+float AMovingPlatform::CapLocationAndReverseVelocity()
+{
 		//Evaluate the distance to avoid shifting
 		//Cap the EndingLocationCapped with the max distance from the StartLocation
 		//	this way, when the distance is overshoot by the previous CurrentPosition evaluation
@@ -61,8 +73,12 @@ void AMovingPlatform::MovePlatform(float DeltaTime)
 
 		//Reverse direction
 		PlatformVelocity = - PlatformVelocity;
-	}
+		return MovedDistance - MaxDistance;
+}
 
+bool AMovingPlatform::ShouldRevertMovementDirection()
+{
+	return MovedDistance > MaxDistance;
 }
 
 void AMovingPlatform::RotatePlatform(float DeltaTime)
@@ -71,5 +87,5 @@ void AMovingPlatform::RotatePlatform(float DeltaTime)
 	
 	CurrentRotation = (CurrentRotation + (PlatformAngularVelocity * DeltaTime)).Clamp();
 	SetActorRotation(CurrentRotation);
-	
+
 }

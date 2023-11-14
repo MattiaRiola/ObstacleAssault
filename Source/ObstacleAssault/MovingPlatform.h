@@ -40,5 +40,6 @@ public:
 private:
 	void MovePlatform(float DeltaTime);
 	void RotatePlatform(float DeltaTime);
-
+    float CapLocationAndReverseVelocity();
+    bool ShouldRevertMovementDirection();
 };
