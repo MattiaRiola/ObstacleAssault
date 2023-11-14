@@ -79,12 +79,12 @@ float AMovingPlatform::CapLocationAndReverseVelocity()
 		return MovedDistance - MaxDistance;
 }
 
-bool AMovingPlatform::ShouldRevertMovementDirection()
+bool AMovingPlatform::ShouldRevertMovementDirection() const
 {
 	return GetDistanceMoved() > MaxDistance;
 }
 
-float AMovingPlatform::GetDistanceMoved()
+float AMovingPlatform::GetDistanceMoved() const
 {
 	return  FVector::Distance(StartLocation, GetActorLocation());
 }

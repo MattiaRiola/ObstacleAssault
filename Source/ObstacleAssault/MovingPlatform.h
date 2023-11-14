@@ -42,6 +42,6 @@ private:
     void UpdatePosition(float DeltaTime);
     void RotatePlatform(float DeltaTime);
     float CapLocationAndReverseVelocity();
-    bool ShouldRevertMovementDirection();
-    float GetDistanceMoved();
+    bool ShouldRevertMovementDirection() const;
+    float GetDistanceMoved() const;
 };
