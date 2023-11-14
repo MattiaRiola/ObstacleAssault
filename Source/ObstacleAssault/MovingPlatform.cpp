@@ -16,6 +16,7 @@ void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 	StartLocation = GetActorLocation();
+	UE_LOG(LogTemp, Display, TEXT("Configured distance: %f"),MaxDistance);
 }
 
 // Called every frame
@@ -32,7 +33,10 @@ void AMovingPlatform::Tick(float DeltaTime)
 	//Boundary reached
 	if(MovedDistance > MaxDistance)
 	{
-		
+		float OverShoot = MovedDistance - MaxDistance;
+		UE_LOG(LogTemp, Warning, TEXT("Configured distance: %f"), OverShoot);
+
+
 		//Evaluate the distance to avoid shifting
 		//Cap the EndingLocationCapped with the max distance from the StartLocation
 		//	this way, when the distance is overshoot by the previous CurrentPosition evaluation
