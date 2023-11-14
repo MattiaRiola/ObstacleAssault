@@ -24,6 +24,13 @@ void AMovingPlatform::BeginPlay()
 void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	MovePlatform(DeltaTime);
+	RotatePlatform(DeltaTime);
+
+}
+
+void AMovingPlatform::MovePlatform(float DeltaTime)
+{
 	//update position
 	FVector CurrentLocation = GetActorLocation();
 	CurrentLocation = CurrentLocation + (PlatformVelocity * DeltaTime);
@@ -35,7 +42,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 	if(MovedDistance > MaxDistance)
 	{
 		float OverShoot = MovedDistance - MaxDistance;
-		UE_LOG(LogTemp, Warning, TEXT("Configured distance: %f"), OverShoot);
+		UE_LOG(LogTemp, Warning, TEXT("%s Pltform overshot: %f"),*GetName(), OverShoot);
 
 
 		//Evaluate the distance to avoid shifting
@@ -58,3 +65,7 @@ void AMovingPlatform::Tick(float DeltaTime)
 
 }
 
+void AMovingPlatform::RotatePlatform(float DeltaTime)
+{
+	UE_LOG(LogTemp, Warning, TEXT("implement this method"));
+}
